@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'rack/handler/puma'
 require 'csv'
+require 'pg'
 
 get '/tests' do
   ### Example
