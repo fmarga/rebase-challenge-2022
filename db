@@ -5,6 +5,5 @@ docker run \
   --network base \
   --name postgres \
   -e POSTGRES_PASSWORD=pass \
-  -e POSTGRES_DB=medical_results \
   -v db:/var/lib/postgresql/data \
   postgres:alpine

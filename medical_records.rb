@@ -2,13 +2,13 @@ require 'csv'
 require 'pg'
 
 class MedicalRecords
-  def initialize(file, db)
+  def initialize(file_csv, db)
     @file_csv = file_csv
     @db = db
   end
 
   def import_from_csv
-    conn = PG.connect(host: @db, dbname: 'medical_results', user: 'postgres', password: 'pass')
+    conn = PG.connect(host: @db, user: 'postgres', password: 'pass')
     conn.exec('DROP TABLE IF EXISTS records')
     conn.exec(
       'CREATE TABLE records (
@@ -31,8 +31,18 @@ class MedicalRecords
       '
     )
 
-    CSV.foreach(@file, headers: true, col_sep: ';') do |row|
+    CSV.foreach(@file_csv, headers: true, col_sep: ';') do |row|
       conn.exec_params('INSERT INTO records VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10 $11, $12, $13, $14, $15, $16)', row.fields)
     end
+  end
+
+  def self.all
+    conn = PG.connect(host: @db, user: 'postgres', password: 'pass')
+    rows = conn.exec('SELECT * FROM records')
+    tests = []
+    rows.each do |row|
+      tests << MedicalRecords.new(row)
+    end
+    tests
   end
 end
