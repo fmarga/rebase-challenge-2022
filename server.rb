@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'rack/handler/puma'
-require 'csv'
 require 'pg'
 require './medical_record'
 
