@@ -2,18 +2,14 @@ require 'sinatra'
 require 'rack/handler/puma'
 require 'csv'
 require 'pg'
+require './medical_record'
 
 get '/tests' do
-  rows = CSV.read("./data.csv", col_sep: ';')
-
-  columns = rows.shift
-
-  rows.map do |row|
-    row.each_with_object({}).with_index do |(cell, acc), idx|
-      column = columns[idx]
-      acc[column] = cell
-    end
-  end.to_json
+  conn = PG.connect(host: 'postgres', user: 'postgres', password: 'pass')
+  conn
+    .exec('SELECT * FROM records')
+    .map { |row| row }
+    .to_json
 end
 
 Rack::Handler::Puma.run(

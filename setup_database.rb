@@ -33,9 +33,7 @@ class SetupDatabase
 
     rows = CSV.read(@csv, headers: true, col_sep: ';')
     rows.each do |row|
-      conn.exec_params('INSERT INTO records  
-                        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)', [row[:cpf], row[:nome_paciente], row[:email_paciente], row[:data_nascimento_paciente], row[:endereco_rua_paciente], row[:cidade_paciente], row[:estado_paciente], row[:crm_medico], row[:crm_medico_estado], row[:nome_medico], row[:email_medico], row[:token_resultado_exame], row[:data_exame], row[:tipo_exame], row[:limites_tipo_exame], row[:resultado_tipo_exame]]
-                      )
+      conn.exec_params('INSERT INTO records VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)', row.fields)
     end
     conn.close
   end
