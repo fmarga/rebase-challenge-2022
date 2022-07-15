@@ -3,12 +3,14 @@ require 'rack/handler/puma'
 require 'pg'
 require './medical_record'
 
+get '/' do
+  'Hello World -----
+  /tests => json imported from csv file -----
+  /import => soon -----'
+end
+
 get '/tests' do
   conn = PG.connect(host: 'postgres', user: 'postgres', password: 'pass')
-  # conn
-  #   .exec('SELECT * FROM records')
-  #   .map { |row| row }
-  #   .to_json
 
   results = conn.exec('SELECT * FROM records')
 
