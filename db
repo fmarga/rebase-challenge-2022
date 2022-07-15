@@ -2,8 +2,8 @@
 
 docker run \
   --rm \
-  --network base \
   --name postgres \
+  --network base \
   -v rebase-db:/var/lib/postgresql/data \
   -e POSTGRES_PASSWORD=pass \
   -d \

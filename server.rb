@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'rack/handler/puma'
 require 'pg'
+require './data_worker'
 require './medical_record'
 
 get '/' do
@@ -22,6 +23,16 @@ get '/tests' do
       acc[column] = cell[1]
     end
   end.to_json
+end
+
+post '/import' do
+  begin
+    path = "imports/#{File.basename(request.body.to_path)}"
+    DataWorker.perform_async(path)
+    201
+  rescue
+    500
+  end
 end
 
 Rack::Handler::Puma.run(

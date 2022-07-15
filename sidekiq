@@ -2,12 +2,10 @@
 
 docker run \
   --rm \
-  -d \
-  --name app \
+  --name sidekiq \
   --network base \
   -w /app \
   -v $(pwd):/app \
   -v gems:/usr/local/bundle \
-  -p 3000:3000 \
   ruby \
-  bash -c "gem install rack sinatra puma pg sidekiq && ruby server.rb"
+  bash -c "sidekiq -r './data_worker.rb' -c 10"
