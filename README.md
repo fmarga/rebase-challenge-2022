@@ -10,9 +10,6 @@ API em Ruby para listagem de exames médicos.
 ## Running
 
 ```bash
-$ bash db
-$ bash redis
-$ bash sidekiq
-$ bash run
+$ docker compose up
 $ open http://localhost:3000/tests
 ```
