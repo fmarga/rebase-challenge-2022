@@ -2,12 +2,10 @@ require 'sinatra'
 require 'rack/handler/puma'
 require 'pg'
 require './data_worker'
-require './medical_record'
+require './setup_database'
 
 get '/' do
-  'Hello World -----
-  /tests => json imported from csv file -----
-  /import => soon -----'
+  'Hello World'
 end
 
 get '/tests' do
@@ -27,7 +25,7 @@ end
 
 post '/import' do
   begin
-    path = "imports/#{File.basename(request.body.to_path)}"
+    path = "import/#{File.basename(request.body.to_path)}"
     DataWorker.perform_async(path)
     201
   rescue
