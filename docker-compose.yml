@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres
+    container_name: postgres
+    volumes: 
+      - rebase-db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pass
+    networks:
+      - base
+
+  app:
+    image: ruby
+    container_name: app
+    command: bash -c "bundle install && ruby server.rb"
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    working_dir: /app
+    networks:
+      - base
+    volumes:
+      - ./:/app
+      - gems:/usr/local/bundle
+
+  redis:
+    image: redis
+    container_name: redis
+    networks:
+      - base
+
+networks:
+  base:
+volumes:
+  gems:
+  rebase-db:

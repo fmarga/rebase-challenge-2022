@@ -1,8 +1,0 @@
-#!/bin/bash
-
-docker run \
-  --rm \
-  -d \
-  --name redis \
-  --network base \
-  redis
