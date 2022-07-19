@@ -3,9 +3,12 @@ require 'csv'
 require './data_connection'
 require './setup_database'
 
-class Results
+class Result
+
   def self.select_tests
-    results = SetupDatabase.select_table
+    SetupDatabase.table
+    SetupDatabase.insert
+    results = SetupDatabase.select_tests
 
     columns = results.fields
 
@@ -15,5 +18,10 @@ class Results
         acc[column] = cell[1]
       end
     end.to_json
+  end
+
+  def self.find_token(token)
+    conn = SetDataConnection.connect
+    conn.exec_params("SELECT * FROM records WHERE token_resultado_exame = '#{token}'")
   end
 end

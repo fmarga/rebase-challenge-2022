@@ -29,7 +29,7 @@ class SetupDatabase
   end
 
   def self.insert
-    rows = CSV.new('.data.csv', headers: true, col_sep: ';')
+    rows = CSV.read('./data.csv', headers: true, col_sep: ';')
     rows.each do |row|
       @conn.exec_params('INSERT INTO records VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)', row.fields)
     end

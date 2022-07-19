@@ -3,14 +3,19 @@ require 'rack/handler/puma'
 require 'pg'
 require './data_worker'
 require './setup_database'
-require './results'
+require './result'
 
 get '/' do
   'Hello World'
 end
 
 get '/tests' do
-  Results.select_tests
+  Result.select_tests
+end
+
+get '/tests/:token' do
+  token = params["token_resultado_exame"]
+  Result.find_token(token).to_json
 end
 
 post '/import' do
