@@ -20,8 +20,7 @@ end
 
 post '/import' do
   begin
-    path = "import/#{File.basename(request.body.to_path)}"
-    DataWorker.perform_async(path)
+    DataWorker.perform_async(request.body.read)
     201
   rescue
     500
