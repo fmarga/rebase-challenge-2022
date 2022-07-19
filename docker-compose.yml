@@ -34,7 +34,7 @@ services:
   sidekiq:
     image: ruby
     container_name: sidekiq
-    command: bash -c "sidekiq -r './data_job.rb' -c 10"
+    command: bash -c "sidekiq -r './data_worker.rb' -c 10"
     working_dir: /app
     networks:
       - base

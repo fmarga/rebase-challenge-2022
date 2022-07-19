@@ -1,32 +1,22 @@
 require 'sinatra'
 require 'rack/handler/puma'
 require 'pg'
-require './data_job'
+require './data_worker'
 require './setup_database'
+require './results'
 
 get '/' do
   'Hello World'
 end
 
 get '/tests' do
-  conn = PG.connect(host: 'postgres', user: 'postgres', password: 'pass')
-
-  results = conn.exec('SELECT * FROM records')
-
-  columns = results.fields
-
-  results.map do |result|
-    result.each_with_object({}).with_index do |(cell, acc), idx|
-      column = columns[idx]
-      acc[column] = cell[1]
-    end
-  end.to_json
+  Results.select_tests
 end
 
 post '/import' do
   begin
     path = "import/#{File.basename(request.body.to_path)}"
-    DataJob.perform_async(path)
+    DataWorker.perform_async(path)
     201
   rescue
     500

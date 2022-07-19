@@ -1,14 +1,13 @@
 require 'pg'
 require 'csv'
+require './data_connection'
 
 class SetupDatabase
-  def initialize
-    conn = PG.connect(host: 'postgres', user: 'postgres', password: 'pass')
-  end
+  @conn = SetDataConnection.connect
 
-  def table
-    conn = exec('DROP TABLE IF EXISTS records')
-    conn.exec(
+  def self.table
+    @conn = exec('DROP TABLE IF EXISTS records')
+    @conn.exec(
       "CREATE TABLE records (
                 cpf VARCHAR(20),
                 nome_paciente VARCHAR(200),
@@ -29,10 +28,14 @@ class SetupDatabase
       ")
   end
 
-  def insert(data)
-    rows = CSV.new(data, headers: true, col_sep: ';')
+  def self.insert
+    rows = CSV.new('.data.csv', headers: true, col_sep: ';')
     rows.each do |row|
-      conn.exec_params('INSERT INTO records VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)', row.fields)
+      @conn.exec_params('INSERT INTO records VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)', row.fields)
     end
+  end
+
+  def self.select_table
+    @conn.exec_params('SELECT * FROM records')
   end
 end
