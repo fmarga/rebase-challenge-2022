@@ -26,7 +26,6 @@ class Result
     columns = results.fields
 
     results.map do |result|
-      # result
       result.each_with_object({}).with_index do |(cell, acc), idx|
         column = columns[idx]
         acc[column] = cell[1]
