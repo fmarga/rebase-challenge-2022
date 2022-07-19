@@ -36,7 +36,7 @@ services:
   sidekiq:
     image: ruby
     container_name: sidekiq
-    command: bash -c "sidekiq -r './data_worker.rb'"
+    command: bash -c "bundle install && bundle exec sidekiq -r './data_worker.rb'"
     working_dir: /app
     networks:
       - base
@@ -45,6 +45,8 @@ services:
       - gems:/usr/local/bundle
     depends_on:
       - redis
+    environment:
+      REDIS_URL: redis://redis:6379
 
 networks:
   base:
