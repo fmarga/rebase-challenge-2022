@@ -5,8 +5,11 @@ require './data_connection'
 class SetupDatabase
   @conn = SetDataConnection.connect
 
-  def self.table
+  def self.drop_table
     @conn.exec('DROP TABLE IF EXISTS records')
+  end
+
+  def self.table 
     @conn.exec(
       "CREATE TABLE records (
                 cpf VARCHAR(20),
