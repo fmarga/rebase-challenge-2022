@@ -14,8 +14,8 @@ get '/tests' do
 end
 
 get '/tests/:token' do
-  token = params["token_resultado_exame"]
-  Result.find_token(token).to_json
+  token = params[:token]
+  Result.find_token(token)
 end
 
 post '/import' do

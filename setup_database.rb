@@ -6,7 +6,7 @@ class SetupDatabase
   @conn = SetDataConnection.connect
 
   def self.table
-    @conn = exec('DROP TABLE IF EXISTS records')
+    @conn.exec('DROP TABLE IF EXISTS records')
     @conn.exec(
       "CREATE TABLE records (
                 cpf VARCHAR(20),

@@ -8,7 +8,7 @@ class Result
   def self.select_tests
     SetupDatabase.table
     SetupDatabase.insert
-    results = SetupDatabase.select_tests
+    results = SetupDatabase.select_table
 
     columns = results.fields
 
@@ -22,6 +22,15 @@ class Result
 
   def self.find_token(token)
     conn = SetDataConnection.connect
-    conn.exec_params("SELECT * FROM records WHERE token_resultado_exame = '#{token}'")
+    results = conn.exec_params("SELECT * FROM records WHERE token_resultado_exame = '#{token}'")
+    columns = results.fields
+
+    results.map do |result|
+      # result
+      result.each_with_object({}).with_index do |(cell, acc), idx|
+        column = columns[idx]
+        acc[column] = cell[1]
+      end
+    end.to_json
   end
 end
