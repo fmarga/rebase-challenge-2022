@@ -59,11 +59,23 @@ services:
       - ./:/app
       - gems:/usr/local/bundle
     environment:
-      - APP_ENV: test
-
+      APP_ENV: test 
+      DB: tests-db
+  
+  tests-db:
+    image: postgres
+    container_name: tests-postgres
+    volumes: 
+      - test-db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pass
+    networks:
+      - base
 
 networks:
   base:
 volumes:
   gems:
   rebase-db:
+  test-db:
