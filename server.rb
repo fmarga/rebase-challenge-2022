@@ -10,12 +10,12 @@ get '/' do
 end
 
 get '/tests' do
-  Result.select_tests
+  Result.select_tests.to_json
 end
 
 get '/tests/:token' do
   token = params[:token]
-  Result.find_token(token)
+  Result.find_token(token).to_json
 end
 
 post '/import' do
