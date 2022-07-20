@@ -1,6 +1,6 @@
 # Endpoints
 
-### GET /tests
+### **GET /tests**
 
 - Mostra todos os resultados de exames cadastrados no banco de dados (resolução do desafio 1)
 - Exemplo de resposta:
@@ -46,7 +46,7 @@
 ]
 ```
 
-### GET /tests/:token
+### **GET /tests/:token**
 
 - Mostra todos os resultados de exames referentes ao token informado (resolução do desafio 3)
 - Exemplo de resposta:
@@ -133,3 +133,12 @@
   ]
 }
 ```
+
+### **POST /import**
+
+- Para adicionar novos dados à aplicação, um arquivo CSV deve ser adicionado, com os seguintes campos:
+
+  **CSV HEADER:**
+
+| cpf | nome paciente | email paciente | data nascimento paciente | endereço/rua paciente | cidade paciente | estado paciente | crm médico | crm médico estado | nome médico | email médico | token resultado exame | data exame | tipo exame | limites tipo exame | resultado tipo exame |
+| :-: | :-----------: | :------------: | :----------------------: | :-------------------: | :-------------: | :-------------: | :--------: | :---------------: | :---------: | :----------: | :-------------------: | :--------: | :--------: | :----------------: | :------------------: |
