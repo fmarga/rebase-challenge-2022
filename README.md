@@ -14,6 +14,8 @@ Você pode encontrar o link do repositório original [aqui](https://git.campusco
 
 ## Running
 
+No seu terminal, digite:
+
 ```bash
 $ docker compose up -d
 ```
