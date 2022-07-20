@@ -136,7 +136,7 @@
 
 ### **POST /import**
 
-- Para adicionar novos dados à aplicação, um arquivo CSV deve ser adicionado, com os seguintes campos:
+- Para adicionar novos dados à aplicação, um arquivo CSV deve ser adicionado, com os seguintes campos: (resolução do desafio 2)
 
   **CSV HEADER:**
 
