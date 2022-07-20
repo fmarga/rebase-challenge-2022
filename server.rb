@@ -23,7 +23,7 @@ post '/import' do
     DataWorker.perform_async(request.body.read)
     201
   rescue
-    500
+    404
   end
 end
 
