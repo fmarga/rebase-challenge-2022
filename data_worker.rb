@@ -1,12 +1,14 @@
 require 'sidekiq'
+require 'csv'
 require './setup_database'
 
 class DataWorker
   include Sidekiq::Worker
 
-  def import(file)
-    csv = CSV.read(file, col_sep: ';', headers: true)
-    SetupDatabase.new.table
+  def import(data)
+    csv = CSV.parse(data, col_sep: ';', headers: true)
+    SetupDatabase.new.drop_table
+    SetupDatabase.table
     SetupDatabase.insert(csv)
     File.delete(file)
   end
