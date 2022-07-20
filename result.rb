@@ -6,9 +6,6 @@ require './setup_database'
 class Result
 
   def self.select_tests
-    SetupDatabase.drop_table
-    SetupDatabase.table
-    SetupDatabase.insert
     results = SetupDatabase.select_table
 
     columns = results.fields

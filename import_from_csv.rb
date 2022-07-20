@@ -1,4 +1,5 @@
 require './setup_database'
 
+SetupDatabase.new.drop_table
 SetupDatabase.table
-SetupDatabase.insert
+SetupDatabase.insert('./data.csv')
