@@ -10,6 +10,5 @@ class DataWorker
     SetupDatabase.new.drop_table
     SetupDatabase.table
     SetupDatabase.insert(csv)
-    File.delete(file)
   end
 end
