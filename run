@@ -1,0 +1,9 @@
+#!/bin/bash
+
+docker run -d --rm -it --name postgres --network base -v rebase-db:/var/lib/postgresql/data -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=pass postgres
+
+docker run -d --rm -it --name redis --network base redis
+
+docker run -d --rm -it --name sidekiq --network base -w /app -v $(pwd):/app -v gems:/usr/local/bundle -e APP_ENV=development -e DB=postgres -e REDIS_URL=redis://redis:6379 ruby bash -c "bundle install && bundle exec sidekiq -r './data_worker.rb'"
+
+docker run -d --rm -it --name app --network base -w /app -v $(pwd):/app -v gems://usr/local/bundle -p 3000:3000 -e REDIS_URL=redis://redis:6379 ruby bash -c "bundle install && ruby server.rb"
