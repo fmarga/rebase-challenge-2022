@@ -1,6 +1,8 @@
 # Rebase Challenge 2022
 
-API em Ruby para listagem de exames médicos.
+Você pode encontrar o link do repositório original [aqui](https://git.campuscode.com.br/core-team/rebase-challenge-2022/-/blob/6b40ad138141f23b70b6ada9ee41fc7a7eb6c84c/run)
+
+### API em Ruby para listagem de exames médicos.
 
 ## Tech Stack
 
@@ -13,10 +15,24 @@ API em Ruby para listagem de exames médicos.
 ## Running
 
 ```bash
-$ docker compose up
-$ open http://localhost:3000/tests
+$ docker compose up -d
 ```
+
+ou, se preferir:
+
+```bash
+$ bash run
+```
+
+- Para acessar a listagem de todos os exames cadastrados:
+  http://localhost:3000/tests
+
+- Para acessar exames relacionados a um token específico:
+  http://localhost:3000/tests/:token
+
+- Para adicionar ao banco de dados uma tabela CSV:
+  http://localhost:3000/import
 
 ## Docs
 
-Você pode encontrar a documentação da API, com os exemplos de endpoints [aqui](https://github.com/fmarga/rebase-challenge-2022/blob/main/API.md)
+Você pode encontrar a documentação da API, com os exemplos de resposta para os endpoints [aqui](https://github.com/fmarga/rebase-challenge-2022/blob/main/API.md)
