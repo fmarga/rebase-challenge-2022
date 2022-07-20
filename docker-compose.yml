@@ -48,6 +48,20 @@ services:
     environment:
       REDIS_URL: redis://redis:6379
 
+  tests:
+    image: ruby
+    container_name: tests
+    command: bash -c "bundle install && ruby server.rb"
+    working_dir: /app
+    networks:
+      - base
+    volumes:
+      - ./:/app
+      - gems:/usr/local/bundle
+    environment:
+      - APP_ENV: test
+
+
 networks:
   base:
 volumes:
