@@ -48,7 +48,7 @@
 
 ### GET /tests/:token
 
-- Mostra todos os resultados de exames referentes ao token informado
+- Mostra todos os resultados de exames referentes ao token informado (resolução do desafio 3)
 - Exemplo de resposta:
 
 ```json
