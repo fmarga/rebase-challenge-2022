@@ -53,34 +53,6 @@ services:
       DB: db
       REDIS_URL: redis://redis:6379
 
-  tests:
-    image: ruby
-    container_name: tests
-    command: bash -c "bundle install && ruby server.rb"
-    working_dir: /app
-    networks:
-      - base
-    volumes:
-      - ./:/app
-      - gems:/usr/local/bundle
-      - .tests:/tests
-    depends_on:
-      - tests-db
-      - sidekiq
-    environment:
-      APP_ENV: test 
-      DB: tests-db
-  
-  tests-db:
-    image: postgres
-    container_name: tests-postgres
-    volumes: 
-      - test-db:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: pass
-    networks:
-      - base
 
 networks:
   base:
