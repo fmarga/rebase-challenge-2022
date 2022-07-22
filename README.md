@@ -38,3 +38,11 @@ $ bash run
 ## Docs
 
 Você pode encontrar a documentação da API, com os exemplos de resposta para os endpoints [aqui](https://github.com/fmarga/rebase-challenge-2022/blob/main/API.md)
+
+## Running tests
+
+Depois de subir os containeres com o comando acima citado, execute o seguinte comando:
+
+```bash
+$ docker exec -it app bundle exec rspec
+```
