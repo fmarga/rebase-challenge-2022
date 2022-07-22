@@ -1,3 +1,4 @@
+require './data_connection'
 require './setup_database'
 
 SetupDatabase.new.drop_table
